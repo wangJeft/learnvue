@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <!--遍历过程没有索引值-->
+    <li v-for="name in names">{{name}}</li>
+    <li>------------------</li>
+    <!--带下标的遍历-->
+    <li v-for="(name, index) in names">{{index+1+'.'+name}}</li>
+  </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue',
+      names: ['li', 'wang', 'yi', 'fan']
+    }
+  })
+</script>
+</body>
+</html>

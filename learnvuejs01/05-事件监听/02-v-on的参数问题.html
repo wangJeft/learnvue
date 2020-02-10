@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  以下两种调用方法一样-->
+  <button @click="btnClick()">按钮1</button>
+  <button @click="btnClick">按钮1</button>
+
+  <button @click="btn2Click(123)">按钮2</button>
+<!--  需要参数但是没有传,也没有写(),则会把点击的动作传过去(浏览器生成的event对象)-->
+  <button @click="btn2Click">按钮2</button>
+<!--  方法定义时,需要event对象和其他参数-->
+  <button @click="btn3Click(123,$event)">按钮3</button>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    },
+    methods:{
+      btnClick(){
+        console.log("btn1Click")
+      },
+      btn2Click(abc){
+        console.log(abc)
+      },
+      btn3Click(abc,event){
+        console.log(abc,'----',event)
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2 v-if="score>=90">A</h2>
+  <h2 v-else-if="score>=80">B</h2>
+  <h2 v-else-if="score>=70">C</h2>
+  <h2 v-else-if="score>=60">D</h2>
+  <h2 v-else>E</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      score: 90
+    },
+    computed: {
+      result(){
+        let message = '';
+        if(this.score>=90){
+          message = "A";
+        }
+        /*
+        ......
+        * */
+      }
+    }
+  })
+</script>
+</body>
+</html>

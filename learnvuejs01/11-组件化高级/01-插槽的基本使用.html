@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn>
+    <i>hehe</i>
+    <div>我是div</div>
+    <p>我是p元素</p>
+  </cpn>
+  <cpn><button>小按钮</button></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>我是标题</h2>
+    <p>我是一个可爱的小组件</p>
+<!--    空插槽-->
+<!--    <slot></slot>-->
+
+<!--    带有默认值的插槽-->
+    <slot><button>按钮</button></slot>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    },
+    components:{
+      cpn:{
+        template:'#cpn'
+      }
+    }
+  })
+</script>
+</body>
+</html>

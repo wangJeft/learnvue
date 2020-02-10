@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn :cnum1="num1" :cnum2="num2" @num1change="num1change" @num2change="num2change"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>props-num1:{{cnum1}}</h2>
+    <h2>data-num1:{{dnum1}}</h2>
+    <label for="num1"><input type="text" id="num1" :value="dnum1" @input="num1Input"></label>
+    <h2>props-num2:{{cnum2}}</h2>
+    <h2>data-num2:{{dnum2}}</h2>
+    <label for="num2"><input type="text" id="num2" :value="dnum2" @input="num2Input"></label>
+  </div>
+
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      num1: 1,
+      num2: 0
+    },
+    methods: {
+      num1change(num1){
+        this.num1 = parseFloat(num1)
+      },
+      num2change(num2){
+        this.num2 = parseFloat(num2)
+      }
+    },
+    components: {
+      cpn: {
+        template: '#cpn',
+        props: {
+          cnum1: Number,
+          cnum2: Number
+        },
+        data() {
+          return {
+            dnum1: this.cnum1,
+            dnum2: this.cnum2
+          }
+        },
+        // watch:{
+        //   dnum1(newValue){
+        //     this.dnum2 = this.newValue *10
+        //     this.$emit('num1change',newValue);
+        //   },
+        //   dnum2(newValue){
+        //     this.dnum1= newValue/100;
+        //     this.$emit('num2change',newValue)
+        //   }
+        // }
+        methods:{
+          num1Input(event){
+            this.dnum1 = event.target.value
+            this.$emit('num1change',this.dnum1)
+            this.dnum2 = this.dnum1 *10
+            this.$emit('num2change',this.dnum2)
+          },
+          num2Input(event){
+            this.dnum2 = event.target.value
+            this.$emit('num2change',this.dnum2)
+            this.dnum1 = this.dnum2/10
+            this.$emit('num1change',this.dnum1)
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--懒加载,让当前的数据失去焦点或者回车时才会更新,而不是实时一直更新-->
+  <label for="hello"><input type="text" id="hello" v-model.lazy="message"></label>
+  <h2>{{message}}</h2>
+<!--v-model默认会绑定string类型,使用number修饰符可以指定绑定为数字类型-->
+  <label for="hello1"><input type="number" id="hello1" v-model.number="age"></label>
+  <h2>{{age}}-{{typeof age}}</h2>
+<!--trim去除数据前后的空格,不能去除中间的空格-->
+  <label for="hello2"><input type="text" id="hello2" v-model.trim="name"></label>
+  <h2>{{name}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue',
+      age:10,
+      name:''
+    }
+  })
+</script>
+</body>
+</html>

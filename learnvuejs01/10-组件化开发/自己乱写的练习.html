@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn :fmessage="message"></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>{{message}}</h2>
+    <h2>{{fmessage}}</h2>
+  </div>
+
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn',
+    data(){
+      return {
+        message:'我是子组件自己的消息'
+      }
+    },
+    props:{
+      fmessage:{
+        type:String,
+        default:'来自父组件的消息'
+      }
+    }
+  }
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    },
+    components:{
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

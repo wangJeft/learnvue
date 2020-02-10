@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h2 v-if="isShow">{{message}}</h2>
+<!--  不是删除标签，而是增加了一个样式令标签不显示 style="display: none;"-->
+  <h2 v-show="isShow">{{message}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue',
+      isShow: true
+    }
+  })
+</script>
+</body>
+</html>

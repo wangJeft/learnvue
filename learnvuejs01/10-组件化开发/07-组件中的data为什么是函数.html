@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  使用的不是同一个data对象-->
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn></cpn>
+</div>
+<template id="cpn">
+  <div>
+    <h2>当前计数:{{counter}}</h2>
+    <button @click="add">+</button>
+    <button @click="sub">-</button>
+  </div>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  Vue.component('cpn',{
+    template:'#cpn',
+    data(){
+      return{
+        counter:0
+      }
+    },
+    methods:{
+      add(){
+        this.counter++
+      },
+      sub(){
+        this.counter--
+      }
+    }
+  })
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    }
+  })
+</script>
+</body>
+</html>

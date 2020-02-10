@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <ul>
+    <!--遍历对象过程中这种形式获取value-->
+    <li v-for="item in info">{{item}}</li>
+    <!--带有key-->
+    <li v-for="(value,key) in info" >{{key}}:{{value}}</li>
+    <!--带有index-->
+    <li v-for="(value,key,index) in info">{{key}}:{{value}}:{{index}}</li>
+  </ul>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      info: {
+        name: 'wang',
+        age: 18,
+        height: 1.88
+      }
+    }
+  })
+</script>
+</body>
+</html>

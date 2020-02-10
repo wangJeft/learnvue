@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <cpn></cpn>
+  <cpn></cpn>
+  <cpn ref="aaa"></cpn>
+  <button @click="btnClick">按钮</button>
+</div>
+<template id="cpn">
+  <h2>我是子组件</h2>
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    },
+    methods: {
+      btnClick(){
+        // console.log(this.$children)
+        // for (let c of this.$children){
+        //   c.showMessage()
+        //   console.log(c.name);
+        // }
+
+        //$refs返回值是个对象类型,默认是空对象,需要使用ref=''才能获取到
+        console.log(this.$refs.aaa.name);
+      }
+    },
+    components:{
+      cpn:{
+        template:'#cpn',
+        methods:{
+          showMessage(){
+            console.log("showMessage")
+          }
+        },
+        data(){
+          return{
+            name:'我是cpn'
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

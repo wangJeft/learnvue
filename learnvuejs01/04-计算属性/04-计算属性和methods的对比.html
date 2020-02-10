@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+<body>
+<div id="app">
+  <!--  1.直接拼接,语法过于繁琐-->
+  <h2>{{firstName}} {{lastName}}</h2>
+
+  <!--  2.通过定义methods,methods每次都会调用-->
+  <h2>{{getFullName()}}</h2>
+
+  <!--  3.通过computed,computed的方式数据没有变化的话只调用一次,内部会将值进行缓存-->
+  <h2>{{fullName}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      firstName: 'wang',
+      lastName: 'hao'
+    },
+    methods: {
+      getFullName: function () {
+        return this.firstName + ' ' + this.lastName
+      }
+    },
+    computed: {
+      //由于下面的写法是省略了get方法,所以在使用fullName的时候并不需要加()
+      fullName: function () {
+        return this.firstName + ' ' + this.lastName
+      }
+
+      /*上面的写法,实际上事fullName 的get方法的缩写
+         fullName:{
+         // set:function () {
+         // 一般不实现get方法
+         // },
+         get:function () {
+           return this.firstName+' '+this.lastName
+         }
+       }*/
+    }
+  })
+</script>
+</body>
+</html>

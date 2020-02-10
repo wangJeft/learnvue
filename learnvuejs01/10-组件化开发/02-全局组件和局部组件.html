@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  <my-cpn></my-cpn>-->
+<!--  <my-cpn></my-cpn>-->
+  <cpn></cpn>
+</div>
+
+<div id="app2">
+<!--  <cpn></cpn>-->
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const cpnC = Vue.extend({
+    template: `
+    <div>
+    <h2>我是标题</h2>
+    <h2>我是内容1</h2>
+    <h2>我是内容2</h2>
+    </div>
+    `
+  });
+  //这种注册是全局组件
+  // Vue.component('my-cpn',cpnC)
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue'
+    },
+    //这种方式注册的是局部组件,只在当前的vue实例中才有效
+    components:{
+      //前面的是使用组件时候的标签名字
+      cpn:cpnC
+    }
+  })
+</script>
+</body>
+</html>

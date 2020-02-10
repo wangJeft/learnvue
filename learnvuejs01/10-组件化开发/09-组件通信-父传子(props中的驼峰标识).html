@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--不能使用驼峰,如果使用驼峰表示需要把驼峰转为 - 标识,例如  cInfo=>c-info  -->
+  <cpn :cinfo="info"></cpn>
+<!--  <cpn :c-info="info"></cpn>-->
+</div>
+<template id="cpn">
+  <h2>{{cinfo}}</h2>
+<!--  <h2>{{cInfo}}</h2>-->
+</template>
+<script src="../js/vue.js"></script>
+<script>
+  const cpn = {
+    template: '#cpn',
+    props: {
+      cinfo: {
+        type: Object,
+        default() {
+          return {};
+        }
+      }
+      // cInfo: {
+      //   type: Object,
+      //   default() {
+      //     return {};
+      //   }
+      // }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue',
+      info: {
+        name: 'wang',
+        age: 18
+      }
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+</body>
+</html>
