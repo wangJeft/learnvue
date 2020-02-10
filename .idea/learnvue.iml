@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/webpack的使用/05-webpack plungin的使用/node_modules/vue/src/platforms" />
+      <excludeFolder url="file://$MODULE_DIR$/webpack的使用/06-webpack配置的分离/node_modules/vue/src/platforms" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

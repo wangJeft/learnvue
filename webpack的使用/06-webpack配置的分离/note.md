@@ -8,8 +8,7 @@ npm install webpack@3.6.0 --save-dev
 npm install --save-dev babel-loader@7 babel-core babel-preset-es2015
 # 安装各种loader,安装详情见 https://www.webpackjs.com/loaders/
 npm install style-loader --save-dev
-....
+
 # 导入vue可以作为非开发时环境
 npm install vue --save
-
 ```

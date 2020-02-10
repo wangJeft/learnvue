@@ -1,4 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+const uglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -6,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     //在网页访问的url加上 dist/
-    publicPath:'dist/'
+    // publicPath:'dist/'
   },
   module: {
     rules: [
@@ -63,5 +68,19 @@ module.exports = {
     alias:{
       'vue$': 'vue/dist/vue.esm.js'
     }
+  },
+  plugins:[
+      new webpack.BannerPlugin('最终版权归任何人所有'),
+      new htmlWebpackPlugin({
+        template:'index.html'
+      }),
+      //压缩js插件,丑化js
+      // new uglifyJsPlugin()
+  ],
+  //开发阶段配置
+  devServer:{
+    contentBase:'./dist',
+    inline:true,
+    port:8888
   }
 };

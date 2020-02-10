@@ -14,7 +14,7 @@ require('./css/normal.css');
 //依赖less
 require('./css/special.less');
 
-document.writeln('<h2>你好啊, vue</h2>');
+// document.writeln('<h2>你好啊, vue</h2>');
 
 //使用vue开发
 import Vue from 'vue'

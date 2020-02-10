@@ -1,12 +1,15 @@
 const path = require('path');
+const webpack = require('webpack');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   entry: './src/main.js',
   output: {
     //动态的获取路径
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: 'bundle.js',
     //在网页访问的url加上 dist/
-    publicPath:'dist/'
+    // publicPath:'dist/'
   },
   module: {
     rules: [
@@ -63,5 +66,11 @@ module.exports = {
     alias:{
       'vue$': 'vue/dist/vue.esm.js'
     }
-  }
+  },
+  plugins:[
+    new webpack.BannerPlugin('最终版权归任何人所有'),
+    new htmlWebpackPlugin({
+      template:'index.html'
+    }),
+  ],
 };
