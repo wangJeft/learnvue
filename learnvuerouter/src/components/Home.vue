@@ -10,7 +10,26 @@
 
 <script>
   export default {
-    name: "Home"
+    name: "Home",
+    data(){
+      return{
+        path:'/home/news'
+      }
+    },
+    created() {
+      console.log('created');
+    },
+    destroyed() {
+      console.log('destroyed');
+    },
+    // deactivated()和activated()只有在使用了keep-alive的情况下才能用
+    activated() {
+      this.$router.replace(this.path)
+    },
+    beforeRouteLeave(to, from,next){
+      this.path = this.$route.path
+      next()
+    }
   }
 </script>
 
