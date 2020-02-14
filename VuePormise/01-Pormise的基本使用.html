@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //1.使用settimeout
+  // setTimeout(()=>{
+  //   console.log('Hello World')
+  // },1000)
+
+  //什么情况下用Promise? 一般情况下是有异步操作的时候对异步操作进行封装
+  new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      // resolve('hello world')
+      reject('hello fail')
+    },1000)
+  }).then((data)=>{
+    console.log(data);
+    console.log(data);
+    console.log(data);
+  }).catch(err=>{
+    console.log(err);
+  })
+</script>
+</body>
+</html>

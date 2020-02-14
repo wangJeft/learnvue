@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  Promise.all([
+      new Promise((resolve,reject)=>{
+          setTimeout(() => {
+            resolve('result1')
+          }, 2000)
+      }),
+      new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve('result2')
+        }, 1000)
+      })
+  ]).then(results=>{
+    //results是个数组.里面的数据和请求顺序一一对应
+    console.log(results);
+  })
+</script>
+</body>
+</html>
