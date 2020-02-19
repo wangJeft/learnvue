@@ -9,12 +9,14 @@ new Vue({
   render: h => h(App)
 })
 
-// axios({
-//   url: "http://123.207.32.32:8000/home/multidata",
-//   method: 'get'
-// }).then(res => {
-//   console.log(res);
-// })
+axios({
+  //这里再config.index.js->proxyTable里面配置了跨域
+  url: "/wxarticle/chapters/json",
+}).then(res => {
+  console.log(res);
+}).catch(err=>{
+  console.log(err);
+})
 
 
 // axios({
@@ -78,20 +80,20 @@ then(results => {
 // })
 
 
-//封装一个request模块
-import {request} from "./network/request";
-// request({
-//   url: '/home/multidata'
-// }, res => {
-//   console.log(res);
+// //封装一个request模块
+// import {request} from "./network/request";
+// // request({
+// //   url: '/home/multidata'
+// // }, res => {
+// //   console.log(res);
+// //
+// // }, err => {
+// //   console.log(err);
+// // })
 //
-// }, err => {
+// request({url: '/home/multidata'})
+//   .then(res => {
+//     console.log(res);
+//   }).catch(err => {
 //   console.log(err);
 // })
-
-request({url: '/home/multidata'})
-  .then(res => {
-    console.log(res);
-  }).catch(err => {
-  console.log(err);
-})
