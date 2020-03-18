@@ -30,7 +30,11 @@
       }
     },
 
+    created() {
+      // console.log('子组件开始创建');
+    },
     mounted() {
+      // console.log('子组件挂载');
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         probeType: this.probeType,
@@ -38,24 +42,38 @@
       })
 
       //监听滚动事件
-      this.scroll.on('scroll', position => {
-        this.$emit('scroll', position)
-      })
+      if (this.probeType === 2 || this.probeType === 3){
+        this.scroll.on('scroll', position => {
+          this.$emit('scroll', position)
+        })
+      }
 
       //监听上拉加载事件
-      this.scroll.on('pullingUp', () => {
-        // console.log('上拉加载');
-        this.$emit('pullUpLoad')
-      })
+      if (this.pullUpLoad){
+        this.scroll.on('pullingUp', () => {
+          // console.log('上拉加载');
+          this.$emit('pullUpLoad')
+        })
+      }
+
 
     },
     methods: {
+      //滚动到页面顶部
       scrollTo(x = 0, y = 0, time = 500) {
-        this.scroll.scrollTo(x, y, time)
+        //this.scroll && 作用是避免当前scroll为空的时候调用方法
+        this.scroll && this.scroll.scrollTo(x, y, time)
       },
-      finishPullUp(){
+      //结束上拉加载
+      finishPullUp() {
         this.scroll.finishPullUp()
+      },
+      //
+      refresh(){
+        // console.log('----');
+        this.scroll && this.scroll.refresh()
       }
+
     }
   }
 </script>

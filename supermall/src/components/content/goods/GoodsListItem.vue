@@ -1,6 +1,7 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="">
+  <div class="goods-item" @click="goodsClick()">
+<!-- @load 监听图片加载完成-->
+    <img :src="goodsItem.show.img" alt="" @load="imgLoad()">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -18,6 +19,19 @@
         default(){
           return {}
         }
+      }
+    },
+    methods:{
+      imgLoad(){
+        //将图片加载完成的事件发射到Home.vue中去
+        this.$bus.$emit("goodsImgLoad")
+        //后面也可以跟参数
+        // this.$bus.$emit("goodsImgLoad",'参数')
+      },
+
+      goodsClick(){
+        // console.log('跳转详情页');
+        this.$router.push('/detail/'+this.goodsItem.iid)
       }
     }
   }

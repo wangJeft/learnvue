@@ -3,15 +3,18 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
+    <tab-control v-show="isTabFixed"
+                 class="tab-control"
+                 ref="tabControl1" :titles="['流行','新款','精选']" @TCIClick="TCIClick"></tab-control>
 
     <scroll class="content" ref="scroll" :probe-type="3"
             :pull-up-load="true"
             @scroll="contentScroll"
             @pullUpLoad="pullUpLoad">
-      <home-swiper :banner="banner"></home-swiper>
+      <home-swiper :banner="banner" @swiperImgLoad="swiperImgLoad"></home-swiper>
       <recommend-view :recommends="recommends"></recommend-view>
       <feature-view></feature-view>
-      <tab-control class="tab-control" :titles="['流行','新款','精选']" @TCIClick="TCIClick"></tab-control>
+      <tab-control ref="tabControl2" :titles="['流行','新款','精选']" @TCIClick="TCIClick"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
 
@@ -56,7 +59,9 @@
           'sell': {page: 0, list: []}
         },
         currentType: 'pop',
-        isShowBackTop: false
+        isShowBackTop: false,
+        tabOffset: 0,
+        isTabFixed: false
       }
     },
     computed: {
@@ -68,8 +73,31 @@
       this.getHomeMultidata();
       this.getHomeGoods('pop');
       this.getHomeGoods('new');
-      this.getHomeGoods('sell')
+      this.getHomeGoods('sell');
+      // console.log('开始创建');
     },
+    mounted() {
+      const refresh = this.debounce(this.$refs.scroll.refresh, 200)
+      //  监听GoodsListItem中发射来的图片加载完成的事件
+      this.$bus.$on('goodsImgLoad', function () {
+        //刷新better-scroll的当前滚动高度
+        refresh();
+      })
+    },
+
+    // beforeDestroy() {
+    //   console.log('home.vue准备销毁');
+    // },
+    // destroyed() {
+    //   console.log('home.vue销毁完毕');
+    // },
+    //
+    // updated() {
+    //   console.log('更新home.vue');
+    // },
+    // beforeUpdate() {
+    //   console.log('准备更新home.vue');
+    // },
     methods: {
       TCIClick(index) {
         switch (index) {
@@ -83,8 +111,40 @@
             this.currentType = 'sell';
             break
         }
+        this.$refs.tabControl1.currentIndex = index
+        this.$refs.tabControl2.currentIndex = index
       },
 
+      backClick() {
+        // console.log('backClick');
+        this.$refs.scroll.scrollTo(0, 0, 1000)
+      },
+
+      contentScroll(position) {
+        this.isShowBackTop = position.y < -800;
+        this.isTabFixed = (-position.y) > this.tabOffset
+      },
+
+      pullUpLoad() {
+        // console.log('上拉加载');
+        this.getHomeGoods(this.currentType)
+      },
+
+      //  防抖函数
+      debounce(func, delay) {
+        let timer = null
+        return function (...args) {
+          if (timer) clearTimeout(timer)
+          timer = setTimeout(() => {
+            func.apply(this, args)
+          }, delay)
+        }
+      },
+
+      swiperImgLoad() {
+        // console.log(this.$refs.tabControl.$el.offsetTop);
+        this.tabOffset = this.$refs.tabControl2.$el.offsetTop
+      },
 
       getHomeMultidata() {
         getHomeMultidata()
@@ -113,19 +173,6 @@
             }
           )
       },
-
-      backClick() {
-        // console.log('backClick');
-        this.$refs.scroll.scrollTo(0, 0, 1000)
-      },
-      contentScroll(position) {
-        this.isShowBackTop = position.y < -800;
-      },
-
-      pullUpLoad(){
-        // console.log('上拉加载');
-        this.getHomeGoods(this.currentType)
-      }
     }
   }
 </script>
@@ -133,33 +180,30 @@
 <!--scoped作用域-->
 <style scoped>
   #home {
-    padding-top: 44px;
+    /*padding-top: 44px;*/
     /*view point高度*/
     height: 100vh;
     position: relative;
+  }
+  .tab-control{
+    position: relative;
+    z-index: 9;
   }
 
   .home-nav {
     background-color: var(--color-high-text);
     color: white;
-
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 9;
-  }
-
-  .tab-control {
-    position: sticky;
-    top: 44px;
-    z-index: 9;
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*z-index: 9;*/
   }
 
   /*方案一*/
   .content {
     /*height: calc(100% - 93px);*/
-    /*overflow: hidden;*/
+    overflow: hidden;
     position: absolute;
     top: 44px;
     bottom: 49px;
